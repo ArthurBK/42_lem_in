@@ -32,8 +32,8 @@ typedef struct  s_inf {
 
 typedef struct  s_box {
   char         *name;
-  struct s_inf *link;
-  struct s_inf *next;
+  struct s_box *link;
+  struct s_box *next;
   int     weight;
 }               t_box;
 
