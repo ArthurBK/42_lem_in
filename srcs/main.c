@@ -84,12 +84,40 @@ size_t	ft_tagline(char **line,	t_inf	**inf, t_box **box)
 	return (0);
 }
 
+t_box *ft_select_box(char *name, t_box **boxes)
+{
+		t_box	*selected_box;
+		t_box	*first_box;
+		first_box = *boxes;
+
+	while ((*boxes))
+	{
+		if (ft_strcmp((*boxes)->name, name) == 0)
+		{
+			// printf("")
+			printf("selected box: %s\n", (*boxes)->name);
+		}
+		*boxes = (*boxes)->next;
+	}
+
+		*boxes = first_box;
+	return(selected_box);
+}
+
 size_t ft_pipe(char **line,	t_inf	**inf, t_box **box)
 {
 
+		t_link	*new_link;
+		t_box	*current_box;
+
+		if (!(new_link = (t_link *)malloc(sizeof(t_link))))
+			return(1);
 		if (ft_strtab(line) == 2)
 		{
-		printf("line[0] %s\n", line[1]);
+			current_box = ft_select_box(line[0], box);
+			// if ()
+		printf("line[0] %s\n", line[0]);
+		printf("line[1] %s\n", line[1]);
 			// box->name = line[0];
 			// box->link = line[0];
 			// box->next = line[1];

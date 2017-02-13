@@ -32,9 +32,16 @@ typedef struct  s_inf {
 
 typedef struct  s_box {
   char         *name;
-  struct s_box *link;
+  struct s_link *link;
   struct s_box *next;
   int     weight;
 }               t_box;
+
+
+typedef struct  s_link {
+  struct s_box *box;
+  struct s_link *next;
+}               t_link;
+
 
 #endif
