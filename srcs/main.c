@@ -56,7 +56,7 @@ size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos)
 		(*box)->next = new_box;
 		(*box) = first;
 	}
-	printf("push box->name: %s\n", new_box->name);
+	// printf("push box->name: %s\n", new_box->name);
 	return (0);
 }
 
@@ -94,9 +94,10 @@ t_box *ft_select_box(char *name, t_box **boxes)
 	{
 		if (ft_strcmp((*boxes)->name, name) == 0)
 		{
-			// printf("")
-			printf("selected box: %s\n", (*boxes)->name);
+			selected_box = *boxes;
+			// printf("selected box: %s\n", (selected_box)->name);
 		}
+
 		*boxes = (*boxes)->next;
 	}
 
@@ -104,20 +105,56 @@ t_box *ft_select_box(char *name, t_box **boxes)
 	return(selected_box);
 }
 
+
+size_t ft_add_link(t_box **current_box, t_box **box_to_link)
+{
+	t_link *new_link;
+	t_link *first_link;
+
+	if (!(new_link = (t_link *)malloc(sizeof(t_link))))
+		return (1);
+	new_link->box = *box_to_link;
+	if ((*current_box)->links == NULL)
+	{
+		(*current_box)->links = new_link;
+		// printf("current_box %s\n", (*current_box)->name);
+		return(0);
+	}
+	else
+	{
+		first_link = (*current_box)->links;
+		while((*current_box)->links->next)
+			(*current_box)->links = (*current_box)->links->next;
+		// printf("add_link %s\n", new_link->box->name);
+
+		(*current_box)->links->next = new_link;
+		(*current_box)->links = first_link;
+
+		// printf("NOT NILL\n");
+	}
+
+	return(0);
+}
+
+
 size_t ft_pipe(char **line,	t_inf	**inf, t_box **box)
 {
 
 		t_link	*new_link;
 		t_box	*current_box;
+		t_box	*box_to_link;
 
 		if (!(new_link = (t_link *)malloc(sizeof(t_link))))
 			return(1);
 		if (ft_strtab(line) == 2)
 		{
-			current_box = ft_select_box(line[0], box);
+			if (!(current_box = ft_select_box(line[0], box)) || !(box_to_link = ft_select_box(line[1], box)))
+				return(1);
+			if (ft_add_link(&current_box, &box_to_link))
+				return(1);
 			// if ()
-		printf("line[0] %s\n", line[0]);
-		printf("line[1] %s\n", line[1]);
+		// printf("line[0] %s\n", line[0]);
+		// printf("line[1] %s\n", line[1]);
 			// box->name = line[0];
 			// box->link = line[0];
 			// box->next = line[1];
@@ -173,6 +210,13 @@ int main(void)
 	while (box)
 {
 	printf("box->name: %s\n", box->name);
+
+  if (box->links != NULL)
+	while (box->links)
+	{
+		printf("link: %s\n", box->links->box->name);
+		box->links = box->links->next;
+	}
 	box = box->next;
 }
 		if (!inf->valid_map)
