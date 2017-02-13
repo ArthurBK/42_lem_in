@@ -84,14 +84,16 @@ size_t	ft_tagline(char **line,	t_inf	**inf, t_box **box)
 	return (0);
 }
 
-size_t ft_pipe(char **line,	t_inf	*inf, t_box *box)
+size_t ft_pipe(char **line,	t_inf	**inf, t_box **box)
 {
 
 		if (ft_strtab(line) == 2)
 		{
-			box->name = line[0];
+		printf("line[0] %s\n", line[1]);
+			// box->name = line[0];
 			// box->link = line[0];
 			// box->next = line[1];
+			return (0);
 		}
 		return(1);
 }
@@ -126,12 +128,12 @@ int main(void)
 		else if (first_line && ft_strtab(line) == 3)
 				if (ft_push_box(&inf, &box, line[0], "box"))
 					return(1);
-		// if (first_line && ft_strtab(line) == 1)
-		// {
-		// 	line = ft_strsplit(str, '-');
-		// 	if (ft_pipe(line, inf, box))
-		// 		break;
-		// }
+		if (first_line && ft_strtab(line) == 1 && line[0][0] != '#')
+		{
+			line = ft_strsplit(str, '-');
+			if (ft_pipe(line, &inf, &box))
+				break;
+		}
 		if (!first_line && ft_isnumber(line[0]) && ft_strtab(line) == 1)
 		{
 		// printf("yo");
