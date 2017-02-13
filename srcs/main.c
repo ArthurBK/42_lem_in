@@ -32,7 +32,7 @@ size_t	ft_strtab(char **tab)
 }
 
 
-size_t ft_push_box(t_inf	*inf, t_box *box, char *name, char *pos)
+size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos)
 {
 
 	t_box *first;
@@ -40,23 +40,31 @@ size_t ft_push_box(t_inf	*inf, t_box *box, char *name, char *pos)
 
 	if (!(new_box = (t_box *)malloc(sizeof(t_box))))
 		return (1);
-	first = box;
-	box->name = ft_strdup(name);
+	first = *box;
+	new_box->name = ft_strdup(name);
 	if (!ft_strcmp(pos, "start"))
-		inf->start = name;
+		(*inf)->start = name;
 	else if(!ft_strcmp(pos, "end"))
-		inf->end = name;
-	while (box)
-		box = box->next;
-	if (box == NULL)
-		box = new_box;
+		(*inf)->end = name;
+	while ((*box))
+		(*box) = (*box)->next;
+	if (*box == NULL)
+	{
+
+		printf("yo\n");
+		(*box) = new_box;
+	}
 	else
-		box = first;
-	printf("push box->name: %s\n", name);
+	{
+		printf("yo2");
+		(*box)->next = new_box;
+		(*box) = first;
+	}
+	printf("push box->name: %s\n", new_box->name);
 	return (0);
 }
 
-size_t	ft_tagline(char **line,	t_inf	*inf, t_box *box)
+size_t	ft_tagline(char **line,	t_inf	**inf, t_box **box)
 {
 	char	*str;
 	char	*pos;
@@ -116,18 +124,18 @@ int main(void)
 			// printf("ft_strcmp(line[0], #): %i\n", line[0][0] == "#"));
 		if (first_line && line[0][0] == '#')
 		{
-				if (ft_tagline(line, inf, box))
+				if (ft_tagline(line, &inf, &box))
 					break;
 		}
 		else if (first_line && ft_strtab(line) == 3)
-				if (ft_push_box(inf, box, line[0], "box"))
+				if (ft_push_box(&inf, &box, line[0], "box"))
 					return(1);
-		if (first_line && ft_strtab(line) == 1)
-		{
-			line = ft_strsplit(str, '-');
-			if (ft_pipe(line, inf, box))
-				break;
-		}
+		// if (first_line && ft_strtab(line) == 1)
+		// {
+		// 	line = ft_strsplit(str, '-');
+		// 	if (ft_pipe(line, inf, box))
+		// 		break;
+		// }
 		if (!first_line && ft_isnumber(line[0]) && ft_strtab(line) == 1)
 		{
 		// printf("yo");
