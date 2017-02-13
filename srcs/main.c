@@ -42,21 +42,17 @@ size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos)
 		return (1);
 	first = *box;
 	new_box->name = ft_strdup(name);
+	new_box->next = NULL;
 	if (!ft_strcmp(pos, "start"))
 		(*inf)->start = name;
 	else if(!ft_strcmp(pos, "end"))
 		(*inf)->end = name;
-	while ((*box))
-		(*box) = (*box)->next;
 	if (*box == NULL)
-	{
-
-		printf("yo\n");
 		(*box) = new_box;
-	}
 	else
 	{
-		printf("yo2");
+	while ((*box)->next)
+		(*box) = (*box)->next;
 		(*box)->next = new_box;
 		(*box) = first;
 	}
@@ -109,9 +105,9 @@ int main(void)
 	t_box	*box;
 
 	inf = (t_inf *)malloc(sizeof(t_inf));
-	box = (t_box *)malloc(sizeof(t_box));
+	// box = (t_box *)malloc(sizeof(t_box));
 	ft_bzero(inf, sizeof(*inf));
-	ft_bzero(box, sizeof(*box));
+	// ft_bzero(box, sizeof(*box));
 	// printf("%zu\n", sizeof(*inf));
 	first_line = 0;
 	while (get_next_line(0, &str) > 0)
