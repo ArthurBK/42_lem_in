@@ -27,7 +27,7 @@ size_t ft_add_link(t_box **current_box, t_box **box_to_link)
 
         if (!(new_link = (t_link *)malloc(sizeof(t_link))))
                 return (1);
-        new_link->box = *box_to_link;
+        new_link->name = (*box_to_link)->name;
         if ((*current_box)->links == NULL)
         {
                 (*current_box)->links = new_link;

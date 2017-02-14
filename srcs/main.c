@@ -49,6 +49,17 @@ int main(void)
 																								first_line = 1;
 																}
 								}
+								// while(box)
+								// {
+								// 	printf("box: %s\n", box->name);
+								// 	while (box->links)
+								// 	{
+								//
+								// 	printf("links: %s\n", box->links->name);
+								// 	box->links = box->links->next;
+								// 	}
+								// 	box = box->next;
+								// }
 								ft_find_paths(&box, &inf);
 								return (0);
 }

@@ -38,11 +38,10 @@ typedef struct  s_box {
   char         *name;
   struct s_link *links;
   struct s_box *next;
-  int     weight;
 }               t_box;
 
 typedef struct  s_link {
-  struct s_box *box;
+  char *name;
   struct s_link *next;
 }               t_link;
 
@@ -67,5 +66,4 @@ t_box *ft_select_box(char *name, t_box **boxes);
 // paths
 void ft_find_paths(t_box **box, t_inf **inf);
 void ft_eval_path(t_box *current_box, t_box *end, t_path **current_path, t_box **boxes);
-
 #endif
