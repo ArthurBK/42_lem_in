@@ -13,10 +13,8 @@ t_box *ft_select_box(char *name, t_box **boxes)
                         selected_box = *boxes;
                         // printf("selected box: %s\n", (selected_box)->name);
                 }
-
                 *boxes = (*boxes)->next;
         }
-
         *boxes = first_box;
         return(selected_box);
 }
@@ -42,13 +40,9 @@ size_t ft_add_link(t_box **current_box, t_box **box_to_link)
                 while((*current_box)->links->next)
                         (*current_box)->links = (*current_box)->links->next;
                 // printf("add_link %s\n", new_link->box->name);
-
                 (*current_box)->links->next = new_link;
                 (*current_box)->links = first_link;
-
-                // printf("NOT NILL\n");
         }
-
         return(0);
 }
 
@@ -80,7 +74,6 @@ size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
 
 size_t ft_push_box(t_inf  **inf, t_box **box, char *name, char *pos)
 {
-
         t_box *first;
         t_box *new_box;
 
@@ -106,11 +99,8 @@ size_t ft_push_box(t_inf  **inf, t_box **box, char *name, char *pos)
         return (0);
 }
 
-
-
 size_t ft_pipe(char **line, t_inf **inf, t_box **box)
 {
-
         t_link  *new_link;
         t_box *current_box;
         t_box *box_to_link;
@@ -123,12 +113,6 @@ size_t ft_pipe(char **line, t_inf **inf, t_box **box)
                         return(1);
                 if (ft_add_link(&current_box, &box_to_link))
                         return(1);
-                // if ()
-                // printf("line[0] %s\n", line[0]);
-                // printf("line[1] %s\n", line[1]);
-                // box->name = line[0];
-                // box->link = line[0];
-                // box->next = line[1];
                 return (0);
         }
         return(1);
