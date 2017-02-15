@@ -28,25 +28,20 @@ size_t ft_add_link(t_box **current_box, t_box **box_to_link)
         if (!(new_link = (t_link *)malloc(sizeof(t_link))))
                 return (1);
         new_link->name = (*box_to_link)->name;
+        new_link->next = NULL;
         if ((*current_box)->links == NULL)
-        {
                 (*current_box)->links = new_link;
-                // printf("current_box %s\n", (*current_box)->name);
-                return(0);
-        }
         else
         {
                 first_link = (*current_box)->links;
                 while((*current_box)->links->next)
                         (*current_box)->links = (*current_box)->links->next;
                 // printf("add_link %s\n", new_link->box->name);
-                (*current_box)->links->next = new_link;
+                // (*current_box)->links->next = new_link;
                 (*current_box)->links = first_link;
         }
         return(0);
 }
-
-
 
 size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
 {

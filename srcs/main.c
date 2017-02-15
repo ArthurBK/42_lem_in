@@ -60,6 +60,6 @@ int main(void)
 								// 	}
 								// 	box = box->next;
 								// }
-								ft_find_paths(&box, &inf);
+								// ft_find_paths(&box, &inf);
 								return (0);
 }
