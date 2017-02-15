@@ -48,18 +48,22 @@ int main(void)
 																								inf->lemmings = ft_atoi(line[0]);
 																								first_line = 1;
 																}
+															free(line);
+															free(str);
 								}
+								free(inf);
+								ft_find_paths(&box, &inf);
 								// while(box)
 								// {
 								// 	printf("box: %s\n", box->name);
 								// 	while (box->links)
 								// 	{
-								//
-								// 	printf("links: %s\n", box->links->name);
-								// 	box->links = box->links->next;
+								// 		printf("links: %s\n", box->links->name);
+								// 		box->links = box->links->next;
 								// 	}
 								// 	box = box->next;
 								// }
-								// ft_find_paths(&box, &inf);
-								return (0);
+// while (1)
+// ;
+		return (0);
 }

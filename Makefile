@@ -3,7 +3,7 @@ DOBJ 	=	objs
 DSRC 	=	srcs
 INC 	=	-I includes/
 CC	 	=	gcc -g
-CFLAGS 	=	$(INC)# -Wall -Werror -Wextra $(INC)
+CFLAGS 	=	$(INC)# -Wall -Werror -Wextra -fsanitize=address $(INC)
 SRC 	=	$(shell find $(DSRC) -name '*.c' -type f)
 SDIR	=	$(shell find $(DSRC) -type d)
 ODIR	=	$(addprefix $(DOBJ)/, $(SDIR))

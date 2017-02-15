@@ -36,6 +36,7 @@ typedef struct  s_inf {
 
 typedef struct  s_box {
   char         *name;
+  int           visited;
   struct s_link *links;
   struct s_box *next;
 }               t_box;
@@ -55,6 +56,9 @@ typedef struct  s_path {
 size_t	ft_strtab(char **tab);
 int ft_isnumber(char *str);
 t_box *ft_find_box(t_box **box, char *name);
+t_link *ft_new_way(char *name);
+t_path *ft_new_path(t_link *path);
+void add_path(t_path **head, t_link **to_add);
 
 // parsers
 size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos);
@@ -65,5 +69,6 @@ t_box *ft_select_box(char *name, t_box **boxes);
 
 // paths
 void ft_find_paths(t_box **box, t_inf **inf);
-void ft_eval_path(t_box *current_box, t_box *end, t_path **current_path, t_box **boxes);
+t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, char *end);
+
 #endif

@@ -9,10 +9,7 @@ t_box *ft_select_box(char *name, t_box **boxes)
         while ((*boxes))
         {
                 if (ft_strcmp((*boxes)->name, name) == 0)
-                {
                         selected_box = *boxes;
-                        // printf("selected box: %s\n", (selected_box)->name);
-                }
                 *boxes = (*boxes)->next;
         }
         *boxes = first_box;
@@ -30,14 +27,15 @@ size_t ft_add_link(t_box **current_box, t_box **box_to_link)
         new_link->name = (*box_to_link)->name;
         new_link->next = NULL;
         if ((*current_box)->links == NULL)
-                (*current_box)->links = new_link;
+            (*current_box)->links = new_link;
         else
         {
+// write(1, "yo", 2);
                 first_link = (*current_box)->links;
-                while((*current_box)->links->next)
+                while ((*current_box)->links->next)
                         (*current_box)->links = (*current_box)->links->next;
                 // printf("add_link %s\n", new_link->box->name);
-                // (*current_box)->links->next = new_link;
+                (*current_box)->links->next = new_link;
                 (*current_box)->links = first_link;
         }
         return(0);
@@ -77,6 +75,8 @@ size_t ft_push_box(t_inf  **inf, t_box **box, char *name, char *pos)
         first = *box;
         new_box->name = ft_strdup(name);
         new_box->next = NULL;
+        new_box->links = NULL;
+        new_box->visited = 0;
         if (!ft_strcmp(pos, "start"))
                 (*inf)->start = name;
         else if(!ft_strcmp(pos, "end"))
@@ -101,6 +101,8 @@ size_t ft_pipe(char **line, t_inf **inf, t_box **box)
         t_box *box_to_link;
 
         if (!(new_link = (t_link *)malloc(sizeof(t_link))))
+                return(1);
+        if (!(box_to_link = (t_box *)malloc(sizeof(t_box))))
                 return(1);
         if (ft_strtab(line) == 2)
         {
