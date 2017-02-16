@@ -62,7 +62,7 @@ t_box *ft_new_box(char *name, int visited, t_link *links);
 void ft_add_path(t_path **head, t_link *to_add);
 void ft_add_link(t_link **head, t_link *to_add);
 t_box *ft_add_box(t_box *current_box, t_box *box_to_link);
-t_link *ft_add_and_cpy_link(t_link *head, t_link *to_add);
+t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add);
 
 
 // parsers
@@ -75,5 +75,8 @@ t_box *ft_select_box(char *name, t_box **boxes);
 void ft_find_paths(t_box **box, t_inf **inf);
 t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *end, int k);
 
+
+//fonctions bizarres a supprimer
+void        hex_dump(void *ptr, size_t size);
 
 #endif

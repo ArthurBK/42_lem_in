@@ -12,11 +12,18 @@ void ft_find_paths(t_box **box, t_inf **inf)
         paths = ft_new_path(NULL, 0);
         new_way = ft_new_way(start);
         paths = ft_eval_path(paths, new_way, start, end, 0);
-        // while (paths->path->next)
-        // {
-        //     printf("%s\n", paths->path->box->name);
-        //     paths->path= paths->path->next;
-        // }
+
+        while (paths)
+        {
+            printf("NEW PATH\n");
+            while (paths->path)
+            {
+              // hex_dump(paths->path, sizeof(paths->path));
+              printf("BOX: %s\n", paths->path->box->name);
+              paths->path = paths->path->next;
+            }
+            paths = paths->next;
+        }
         if (!(*inf)->valid_map)
                 printf("ERROR");
 }
@@ -39,9 +46,9 @@ t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *
     return (paths);
   }
   while (links) {
-    cpy_way = ft_add_and_cpy_link(new_way, links);
     if (!links->box->visited)
     {
+      cpy_way = ft_add_and_cpy_link(new_way, links->box);
       current_box->visited = 1;
       ft_eval_path(paths, cpy_way, links->box, end, k + 1);
       current_box->visited = 0;
@@ -49,6 +56,5 @@ t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *
     }
     links = links->next;
   }
-
   return (paths);
 }
