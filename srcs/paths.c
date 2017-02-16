@@ -15,7 +15,8 @@ void ft_find_paths(t_box **box, t_inf **inf)
 
         while (paths)
         {
-            printf("NEW PATH\n");
+            printf("NEW PATH\t");
+            printf("LENGTH %d\n", paths->length);
             while (paths->path)
             {
               // hex_dump(paths->path, sizeof(paths->path));

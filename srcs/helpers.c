@@ -77,19 +77,38 @@ t_link *ft_new_way(t_box *box)
 								return (new_way);
 }
 
+size_t ft_path_size(t_link *list)
+{
+		size_t i;
+
+		i = 0;
+		while (list)
+		{
+			++i;
+			list = list->next;
+		}
+		return (i);
+}
+
 void ft_add_path(t_path **head, t_link *to_add)
 {
 								t_path *first;
 								t_path *new_path;
+								size_t length;
 
-								new_path = ft_new_path(to_add, 1);
+								new_path = ft_new_path(to_add, ft_path_size(to_add) - 1);
+								length = ft_path_size(to_add);
 								first = *head;
 								if ((*head)->path == NULL)
-									(*head)->path = to_add;
+									{
+										(*head)->length = ft_path_size(to_add) - 1;
+										(*head)->path = to_add;
+									}
 								else
 								{
 								while ((*head)->next)
 																*head = (*head)->next;
+								// (*head)->length = length;
 								(*head)->next = new_path;
 								}
 								*head = first;
