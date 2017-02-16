@@ -58,7 +58,7 @@ int main(void)
 								// 	printf("box: %s\n", box->name);
 								// 	while (box->links)
 								// 	{
-								// 		printf("links: %s\n", box->links->name);
+								// 		printf("links: %s\n", box->links->box->name);
 								// 		box->links = box->links->next;
 								// 	}
 								// 	box = box->next;
