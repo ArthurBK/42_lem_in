@@ -79,39 +79,55 @@ t_link *ft_new_way(t_box *box)
 
 size_t ft_path_size(t_link *list)
 {
-		size_t i;
+								size_t i;
 
-		i = 0;
-		while (list)
-		{
-			++i;
-			list = list->next;
-		}
-		return (i);
+								i = 0;
+								while (list)
+								{
+																++i;
+																list = list->next;
+								}
+								return (i);
 }
 
 void ft_add_path(t_path **head, t_link *to_add)
 {
-								t_path *first;
+								t_path *elem;
 								t_path *new_path;
+								t_path *prev;
+								int added;
 								size_t length;
 
-								new_path = ft_new_path(to_add, ft_path_size(to_add) - 1);
-								length = ft_path_size(to_add);
-								first = *head;
-								if ((*head)->path == NULL)
-									{
-										(*head)->length = ft_path_size(to_add) - 1;
-										(*head)->path = to_add;
-									}
+								added = 0;
+								length = ft_path_size(to_add) - 1;
+								new_path = ft_new_path(to_add, length);
+								elem = *head;
+								if (*head == NULL)
+																*head = new_path;
 								else
 								{
-								while ((*head)->next)
-																*head = (*head)->next;
-								// (*head)->length = length;
-								(*head)->next = new_path;
+																if (elem->length > length)
+																{
+																								added = 1;
+																								new_path->next = *head;
+																								*head = new_path;
+																}
+																while (elem->next && !added)
+																{
+
+																								prev = elem;
+																								elem = elem->next;
+																								if (elem->length > length)
+																								{
+																																added = 1;
+																																prev->next = new_path;
+																																new_path->next = elem;
+																																break;
+																								}
+																}
+																if (!added)
+																								elem->next = new_path;
 								}
-								*head = first;
 }
 
 
@@ -121,17 +137,17 @@ void ft_add_link(t_link **head, t_link *to_add)
 
 								first = *head;
 								if ((*head)->box == NULL)
-									(*head)->box = to_add->box;
+																(*head)->box = to_add->box;
 								else
 								{
 
-								while ((*head)->next)
-								{
-																if ((*head)->next == to_add)
-																								break;
-																*head = (*head)->next;
-								}
-								(*head)->next = to_add;
+																while ((*head)->next)
+																{
+																								if ((*head)->next == to_add)
+																																break;
+																								*head = (*head)->next;
+																}
+																(*head)->next = to_add;
 								}
 								*head = first;
 }
@@ -143,16 +159,16 @@ t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add)
 								t_link *new_head;
 
 								if (!(new_head = ft_new_way(NULL)))
-									return (NULL);
+																return (NULL);
 								while (head)
 								{
-										if (!(new_link = ft_new_way(head->box)))
-											return (NULL);
-										ft_add_link(&new_head, new_link);
-										head = head->next;
+																if (!(new_link = ft_new_way(head->box)))
+																								return (NULL);
+																ft_add_link(&new_head, new_link);
+																head = head->next;
 								}
 								if (!(new_link = ft_new_way(to_add)))
-										return (NULL);
+																return (NULL);
 								ft_add_link(&new_head, new_link);
 								return (new_head);
 }

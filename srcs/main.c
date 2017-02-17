@@ -12,7 +12,6 @@
 
 #include "lem_in.h"
 
-
 int main(void)
 {
 								char *str;
@@ -20,6 +19,7 @@ int main(void)
 								char first_line;
 								t_inf *inf;
 								t_box *box;
+								t_path *paths;
 
 								inf = (t_inf *)malloc(sizeof(t_inf));
 								ft_bzero(inf, sizeof(*inf));
@@ -52,18 +52,7 @@ int main(void)
 															free(str);
 								}
 								free(inf);
-								ft_find_paths(&box, &inf);
-								// while(box)
-								// {
-								// 	printf("box: %s\n", box->name);
-								// 	while (box->links)
-								// 	{
-								// 		printf("links: %s\n", box->links->box->name);
-								// 		box->links = box->links->next;
-								// 	}
-								// 	box = box->next;
-								// }
-// while (1)
-// ;
+								paths = ft_find_paths(&box, &inf);
+								ft_lem_in(&paths, &inf);
 		return (0);
 }
