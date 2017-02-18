@@ -52,6 +52,19 @@ t_path *ft_new_path(t_link *path, int length)
 								return (new_path);
 }
 
+t_ant *ft_new_ant(t_link *current_box, int ant_id)
+{
+
+								t_ant *new_ant;
+
+								if (!(new_ant = (t_ant *)malloc(sizeof(t_ant))))
+																return (NULL);
+								new_ant->ant_id = ant_id;
+								new_ant->current_box = current_box;
+								new_ant->next = NULL;
+								return (new_ant);
+}
+
 t_box *ft_new_box(char *name, int visited, t_link *links)
 {
 
@@ -89,6 +102,26 @@ size_t ft_path_size(t_link *list)
 								}
 								return (i);
 }
+
+
+void ft_add_ant(t_ant **head, t_ant *to_add)
+{
+								t_ant *elem;
+
+								elem = *head;
+								if (*head == NULL)
+											(*head) = to_add;
+								else
+								{
+
+																while (elem->next)
+																								elem = elem->next;
+																elem->next = to_add;
+								}
+}
+
+
+
 
 void ft_add_path(t_path **head, t_link *to_add)
 {

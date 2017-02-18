@@ -17,6 +17,7 @@ int main(void)
 								char *str;
 								char **line;
 								char first_line;
+								int lems;
 								t_inf *inf;
 								t_box *box;
 								t_path *paths;
@@ -52,7 +53,10 @@ int main(void)
 															free(str);
 								}
 								free(inf);
+								lems = inf->lemmings;
 								paths = ft_find_paths(&box, &inf);
+								inf->lemmings = lems;
+								// printf("ilemmings: %zu\n", (inf)->lemmings);
 								ft_lem_in(&paths, &inf);
 		return (0);
 }

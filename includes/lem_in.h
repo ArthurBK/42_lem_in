@@ -52,6 +52,12 @@ typedef struct  s_path {
   struct s_path *next;
 }               t_path;
 
+typedef struct  s_ant {
+  int ant_id;
+  struct s_link *current_box;
+  struct s_ant *next;
+}               t_ant;
+
 // helpers
 size_t	ft_strtab(char **tab);
 int ft_isnumber(char *str);
@@ -63,7 +69,8 @@ void ft_add_path(t_path **head, t_link *to_add);
 void ft_add_link(t_link **head, t_link *to_add);
 t_box *ft_add_box(t_box *current_box, t_box *box_to_link);
 t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add);
-
+void ft_add_ant(t_ant **head, t_ant *to_add);
+t_ant *ft_new_ant(t_link *current_box, int ant_id);
 
 // parsers
 size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos);
@@ -73,7 +80,7 @@ t_box *ft_select_box(char *name, t_box **boxes);
 
 // paths
 t_path *ft_find_paths(t_box **box, t_inf **inf);
-t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *end, int k);
+t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *end, t_inf **inf);
 
 // resolution
 void ft_lem_in(t_path **paths, t_inf **inf);
