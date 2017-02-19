@@ -23,10 +23,6 @@ int main(void)
 								t_path *paths;
 
 								inf = (t_inf *)malloc(sizeof(t_inf));
-								inf->start = NULL;
-								inf->end = NULL;
-								inf->lemmings = 0;
-								inf->valid_map = 0;
 								// ft_bzero(inf, sizeof(*inf));
 								first_line = 0;
 								while (get_next_line(0, &str) > 0)
@@ -53,14 +49,20 @@ int main(void)
 																								inf->lemmings = ft_atoi(line[0]);
 																								first_line = 1;
 																}
-															free(line);
-															free(str);
+// 															free(line);
+// 															free(str);
+// line = NULL;
+// str = NULL;
 								}
-								// free(inf);
 								// lems = inf->lemmings;
 								paths = ft_find_paths(&box, &inf);
 								// inf->lemmings = lems;
 								// printf("ilemmings: %zu\n", (inf)->lemmings);
 								ft_lem_in(&paths, &inf);
+								// free(inf);
+								// free(paths);
+								// free(box);
+// while (1)
+// ;
 		return (0);
 }
