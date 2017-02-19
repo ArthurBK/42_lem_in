@@ -27,6 +27,9 @@
 #define WHT  "\e[37m"
 #define EOC  "\e[0m"
 
+typedef struct  s_link t_link;
+typedef struct  s_box t_box;
+
 typedef struct  s_inf {
   size_t lemmings;
   char *start;
@@ -63,7 +66,7 @@ size_t	ft_strtab(char **tab);
 int ft_isnumber(char *str);
 t_box *ft_find_box(t_box **box, char *name);
 t_link *ft_new_way(t_box *box);
-t_path *ft_new_path(t_link *path, int length);
+t_path *ft_new_path(t_link *path, size_t length);
 t_box *ft_new_box(char *name, int visited, t_link *links);
 void ft_add_path(t_path **head, t_link *to_add);
 void ft_add_link(t_link **head, t_link *to_add);

@@ -39,7 +39,7 @@ t_box *ft_find_box(t_box **box, char *name)
 								return (NULL);
 }
 
-t_path *ft_new_path(t_link *path, int length)
+t_path *ft_new_path(t_link *path, size_t length)
 {
 
 								t_path *new_path;
@@ -47,6 +47,8 @@ t_path *ft_new_path(t_link *path, int length)
 								if (!(new_path = (t_path *)malloc(sizeof(t_path))))
 																return (NULL);
 								new_path->path = path;
+      					// printf("LENGTH: %zu\t", (new_path->length));
+      					// printf("new path address: %p\n", &(new_path->length));
 								new_path->length = length;
 								new_path->next = NULL;
 								return (new_path);

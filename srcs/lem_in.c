@@ -10,7 +10,7 @@ void ft_lem_in(t_path **paths, t_inf **inf)
   t_ant *ant_elem;
 
   i = 1;
-  count = (*inf)->lemmings + (*paths)->length;
+  count = (*inf)->lemmings + (*paths)->length - 1;
   ant_list = NULL;
   elem = (*paths)->path->next;
   while (count != 0)
