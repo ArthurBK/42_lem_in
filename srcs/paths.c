@@ -30,6 +30,7 @@ t_path *ft_find_paths(t_box **box, t_inf **inf)
         // }
         if (paths != NULL)
             (*inf)->valid_map = 1;
+        // free(start);
         return (paths);
 }
 

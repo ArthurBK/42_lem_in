@@ -46,8 +46,6 @@ t_path	*ft_new_path(t_link *path, size_t length)
 	if (!(new_path = (t_path *)malloc(sizeof(t_path))))
 		return (NULL);
 	new_path->path = path;
-	// printf("LENGTH: %zu\t", (new_path->length));
-	// printf("new path address: %p\n", &(new_path->length));
 	new_path->length = length;
 	new_path->next = NULL;
 	return (new_path);
@@ -120,9 +118,6 @@ void ft_add_ant(t_ant **head, t_ant *to_add)
 		elem->next = to_add;
 	}
 }
-
-
-
 
 void ft_add_path(t_path **head, t_link *to_add)
 {

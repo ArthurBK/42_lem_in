@@ -37,4 +37,9 @@ void ft_lem_in(t_path **paths, t_inf **inf)
     printf("\n");
     --count;
   }
+    while (ant_list)
+    {
+      free(ant_list);
+      ant_list = ant_list->next;
+    }
 }

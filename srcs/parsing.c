@@ -34,6 +34,7 @@ t_box *ft_add_box(t_box *current_box, t_box *box_to_link)
                 current_box->links->next = new_link;
                 current_box->links = first_link;
         }
+
         return(current_box);
 }
 
@@ -42,22 +43,26 @@ size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
         char  *str;
         char  *pos;
 
-        pos = ft_strdup(line[0]);
+printf("yo\n");
+// printf("*box %s\n", (*box)->name);
+        pos = line[0];
         if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0 )
             && get_next_line(0, &str) > 0)
         {
+                // free(pos);
                 line = ft_strsplit(str, ' ');
                 if (ft_strtab(line) != 3 || line[0][0] == 'L')
                         return (1);
                 if (ft_strcmp(pos, "##start") == 0)
                 {
-                        // printf("tagline %s\n", line[0]);
+                        // printf("tagline\n");
                         if (ft_push_box(inf, box, line[0], "start"))
                                 return(1);
                 }
                 else if (ft_push_box(inf, box, line[0], "end"))
                         return(1);
         }
+// printf("SORTIE\n");
         return (0);
 }
 
