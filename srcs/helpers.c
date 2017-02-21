@@ -191,9 +191,9 @@ t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add)
 		if (!(new_link = ft_new_way(head->box)))
 			return (NULL);
 		ft_add_link(&new_head, new_link);
-		tmp = head;
+		// tmp = head;
 		head = head->next;
-		free(tmp);
+		// free(tmp);
 	}
 	// free(tmp);
 	if (!(new_link = ft_new_way(to_add)))
