@@ -43,14 +43,14 @@ t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *
 
   if (current_box == end)
   {
-      // printf("address: %p\t", &((*inf)->lemmings));
-      // printf("lemmings: %zu\n", (*inf)->lemmings);
+    // free(new_way);
     ft_add_path(&paths, new_way);
     return (paths);
   }
   while (links) {
     if (!links->box->visited)
     {
+      // cpy_way = ft_add_and_cpy_link(&new_way, links->box);
       cpy_way = ft_add_and_cpy_link(new_way, links->box);
       current_box->visited = 1;
       paths = ft_eval_path(paths, cpy_way, links->box, end, inf);

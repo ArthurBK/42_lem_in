@@ -37,34 +37,32 @@ t_box *ft_add_box(t_box *current_box, t_box *box_to_link)
 size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
 {
         char  *str;
+        char  **line2;
         char  *pos;
         int i;
 
         i = 0;
-        pos = ft_strdup(line[0]);
+        pos = line[0];
 
         if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0 )
             && get_next_line(0, &str) > 0)
         {
-                // while (line[i])
-                //   free(line[i++]);
-                // free(line);
-                line = ft_strsplit(str, ' ');
-                if (ft_strtab(line) != 3 || line[0][0] == 'L')
+                line2 = ft_strsplit(str, ' ');
+                if (ft_strtab(line2) != 3 || line2[0][0] == 'L')
                         return (1);
                 if (ft_strcmp(pos, "##start") == 0)
                 {
-                        if (ft_push_box(inf, box, line[0], "start"))
+                        if (ft_push_box(inf, box, line2[0], "start"))
                                 return(1);
                 }
-                else if (ft_push_box(inf, box, line[0], "end"))
+                else if (ft_push_box(inf, box, line2[0], "end"))
                         return(1);
-                while (line[i])
-                  free(line[i++]);
-                free(line);
+                while (line2[i])
+                  free(line2[i++]);
+                free(line2);
                 free(str);
         }
-        free (pos);
+        // free (pos);
         return (0);
 }
 
@@ -75,16 +73,15 @@ size_t ft_push_box(t_inf  **inf, t_box **box, char *name, char *pos)
 
         elem = *box;
         new_box = ft_new_box(name, 0, NULL);
-        // if (!ft_strcmp(pos, "start"))
-        //         (*inf)->start = ft_strdup(name);
-        // else if(!ft_strcmp(pos, "end"))
-        //         (*inf)->end = ft_strdup(name);
+        if (!ft_strcmp(pos, "start"))
+                (*inf)->start = ft_strdup(name);
+        else if(!ft_strcmp(pos, "end"))
+                (*inf)->end = ft_strdup(name);
         // free(name);
         if (elem == NULL)
             *box = new_box;
         else
         {
-                printf("yolo1\n");
                 while (elem->next)
                         elem = elem->next;
                 elem->next = new_box;

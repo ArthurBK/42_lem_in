@@ -71,10 +71,10 @@ t_box *ft_new_box(char *name, int visited, t_link *links)
 
 	if (!(new_box = (t_box *)malloc(sizeof(t_box))))
 		return (NULL);
-	// new_box->name = name;
-	// new_box->links = links;
-	// new_box->visited = visited;
-	// new_box->next = NULL;
+	new_box->name = ft_strdup(name);
+	new_box->links = links;
+	new_box->visited = visited;
+	new_box->next = NULL;
 	return (new_box);
 }
 
