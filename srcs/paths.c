@@ -16,13 +16,13 @@ t_path *ft_find_paths(t_box **box, t_inf **inf)
         // while (paths)
         // {
         //     // printf("NEW PATH\t");
-        //     printf("LENGTH %zu\n", paths->length);
+        //     // printf("LENGTH %zu\n", paths->length);
         //     while (paths->path)
         //     {
         //       // hex_dump(paths->path, sizeof(paths->path));
         //       // printf("ADDRESS %p\t", paths->path->box->name);
         //       printf("%s\t ", paths->path->box->name);
-        //       printf("length: %zu ", paths->length);
+        //       // printf("length: %zu ", paths->length);
         //       paths->path = paths->path->next;
         //     }
         //     printf("\n");

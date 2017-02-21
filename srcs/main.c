@@ -46,6 +46,10 @@ int main(void)
 																																return(1);
 																if (first_line && ft_strtab(line) == 1 && line[0][0] != '#')
 																{
+																					while(line[i])
+																							free(line[i++]);
+																					free(line);
+																					i = 0;
 																								line = ft_strsplit(str, '-');
 																								if (ft_pipe(line, &inf, &box))
 																																break;
@@ -55,9 +59,9 @@ int main(void)
 																								inf->lemmings = ft_atoi(line[0]);
 																								first_line = 1;
 																}
-																// while (line[i])
-																// 		free(line[i++]);
-																// free(line);
+																while (line[i])
+																		free(line[i++]);
+																free(line);
 																free(str);
 								}
 																								// while (line[i])
@@ -72,13 +76,13 @@ int main(void)
 								// 		free(box);
 								// 		box = box->next;
 								// }
-								while (paths)
-								{
-										free(paths->path);
-										free(paths);
-										paths = paths->next;
-								}
-// sleep(30);
+								// while (paths)
+								// {
+								// 		free(paths->path);
+								// 		free(paths);
+								// 		paths = paths->next;
+								// }
+sleep(30);
 								// free(inf);
 		return (0);
 }

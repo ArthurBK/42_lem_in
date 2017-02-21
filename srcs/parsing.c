@@ -1,18 +1,19 @@
 #include "lem_in.h"
 
+
+//return(elem);
 t_box *ft_select_box(char *name, t_box **boxes)
 {
         t_box *selected_box;
-        t_box *first_box;
-        first_box = *boxes;
+        t_box *elem;
+        elem = *boxes;
 
-        while ((*boxes))
+        while (elem)
         {
-                if (ft_strcmp((*boxes)->name, name) == 0)
-                        selected_box = *boxes;
-                *boxes = (*boxes)->next;
+                if (ft_strcmp(elem->name, name) == 0)
+                        selected_box = elem;
+                elem = elem->next;
         }
-        *boxes = first_box;
         return(selected_box);
 }
 
@@ -20,21 +21,19 @@ t_box *ft_select_box(char *name, t_box **boxes)
 t_box *ft_add_box(t_box *current_box, t_box *box_to_link)
 {
         t_link *new_link;
-        t_link *first_link;
+        t_link *elem;
 
         if (!(new_link = ft_new_way(box_to_link)))
           return (NULL);
-        if (current_box->links == NULL)
+        if (current_box == NULL)
             current_box->links = new_link;
         else
         {
-                first_link = current_box->links;
-                while (current_box->links->next)
-                        current_box->links = current_box->links->next;
-                current_box->links->next = new_link;
-                current_box->links = first_link;
+                elem = current_box->links;
+                while (elem->next)
+                        elem = elem->next;
+                elem->next = new_link;
         }
-
         return(current_box);
 }
 
@@ -43,7 +42,7 @@ size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
         char  *str;
         char  *pos;
 
-printf("yo\n");
+// printf("yo\n");
 // printf("*box %s\n", (*box)->name);
         pos = line[0];
         if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0 )
@@ -92,7 +91,6 @@ size_t ft_push_box(t_inf  **inf, t_box **box, char *name, char *pos)
 
 size_t ft_pipe(char **line, t_inf **inf, t_box **box)
 {
-        t_link  *new_link;
         t_box *current_box;
         t_box *box_to_link;
 
