@@ -124,12 +124,20 @@ void ft_add_path(t_path **head, t_link *to_add)
 	t_path *elem;
 	t_path *new_path;
 	t_path *prev;
+	t_link *fresh_link = NULL;
+	t_link *to_free;
 	int added;
 	size_t length;
 
 	added = 0;
 	length = ft_path_size(to_add) - 1;
-	new_path = ft_new_path(to_add, length);
+	while (to_add)
+	{
+			ft_add_link(&fresh_link, ft_new_way(to_add->box));
+			to_add = to_add->next;
+	}
+	// free(to_add);
+	new_path = ft_new_path(fresh_link, length);
 	elem = *head;
 	if (*head == NULL)
 		*head = new_path;
@@ -157,6 +165,7 @@ void ft_add_path(t_path **head, t_link *to_add)
 		if (!added)
 			elem->next = new_path;
 	}
+	// sleep(3);
 }
 
 
@@ -183,9 +192,10 @@ t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add)
 {
 	t_link *new_link;
 	t_link *new_head;
-	t_link *tmp;
+	// t_link *tmp;
 
 	new_head = NULL;
+	// tmp = NULL;
 	while (head)
 	{
 		if (!(new_link = ft_new_way(head->box)))
@@ -193,7 +203,7 @@ t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add)
 		ft_add_link(&new_head, new_link);
 		// tmp = head;
 		head = head->next;
-		// free(tmp);
+		// free(head);
 	}
 	// free(tmp);
 	if (!(new_link = ft_new_way(to_add)))

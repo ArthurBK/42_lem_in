@@ -71,10 +71,19 @@ int main(void)
 																free(str);
 								}
 								paths = ft_find_paths(&box, &inf);
+								// printf("leaks?\n");
 								ft_lem_in(&paths, &inf);
+								sleep(5);
+
+// sleep(30);
 								// while (paths)
 								// {
+								// 	// free(&paths->length);
+								// 	while (paths->path)
+								// 	{
 								// 		free(paths->path);
+								// 		paths->path = paths->path->next;
+								// 	}
 								// 		free(paths);
 								// 		paths = paths->next;
 								// }
@@ -91,10 +100,10 @@ int main(void)
 								// 	free(box->name);
 								// 	box = box->next;
 								// }
-								// free(box);
 								// free(inf->start);
 								// free(inf->end);
 								// free(inf);
-								sleep(30);
+								// free(box);
+								// sleep(30);
 								return (0);
 }

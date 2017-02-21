@@ -12,25 +12,27 @@ t_path *ft_find_paths(t_box **box, t_inf **inf)
         paths = NULL;
         new_way = ft_new_way(start);
         paths = ft_eval_path(paths, new_way, start, end, inf);
-
         // while (paths)
         // {
-        //     // printf("NEW PATH\t");
-        //     // printf("LENGTH %zu\n", paths->length);
+        // //     // printf("NEW PATH\t");
+        // //     // printf("LENGTH %zu\n", paths->length);
         //     while (paths->path)
         //     {
-        //       // hex_dump(paths->path, sizeof(paths->path));
-        //       // printf("ADDRESS %p\t", paths->path->box->name);
-        //       printf("%s\t ", paths->path->box->name);
-        //       // printf("length: %zu ", paths->length);
+        // //       // hex_dump(paths->path, sizeof(paths->path));
+        // //       // printf("ADDRESS %p\t", paths->path->box->name);
+        // //       printf("%s\t ", paths->path->box->name);
+        // //       // printf("length: %zu ", paths->length);
+        //       free(paths->path);
         //       paths->path = paths->path->next;
         //     }
-        //     printf("\n");
+        // //     printf("\n");
         //     paths = paths->next;
         // }
         if (paths != NULL)
             (*inf)->valid_map = 1;
-        // free(start);
+        free(new_way);
+        // printf("LEAKS?\n");
+        // sleep(5);
         return (paths);
 }
 
@@ -40,26 +42,32 @@ t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *
 
   t_link *links = current_box->links;
   t_link *cpy_way;
+  t_link *tmp;
 
   if (current_box == end)
   {
     // free(new_way);
-
+    // printf("yo\n");
     ft_add_path(&paths, new_way);
+    // printf("noleaks\n");
+    // sleep(1);
     return (paths);
   }
   while (links) {
     if (!links->box->visited)
     {
-      // ft_add_link(&new_way, ft_new_way(links->box));
-      cpy_way = ft_add_and_cpy_link(new_way, links->box);
+      tmp = ft_new_way(links->box);
+      ft_add_link(&new_way, tmp);
       current_box->visited = 1;
-      paths = ft_eval_path(paths, cpy_way, links->box, end, inf);
+      paths = ft_eval_path(paths, new_way, links->box, end, inf);
+      free(tmp);
+      // paths = ft_eval_path(paths, cpy_way, links->box, end, inf);
       // free(cpy_way);
       current_box->visited = 0;
-
     }
     links = links->next;
   }
+
+  // sleep(3);
   return (paths);
 }
