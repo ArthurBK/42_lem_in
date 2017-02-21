@@ -1,7 +1,5 @@
 #include "lem_in.h"
 
-
-//return(elem);
 t_box *ft_select_box(char *name, t_box **boxes)
 {
         t_box *selected_box;
@@ -16,7 +14,6 @@ t_box *ft_select_box(char *name, t_box **boxes)
         }
         return(selected_box);
 }
-
 
 t_box *ft_add_box(t_box *current_box, t_box *box_to_link)
 {
@@ -41,12 +38,17 @@ size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
 {
         char  *str;
         char  *pos;
+        int i;
 
-        pos = line[0];
+        i = 0;
+        pos = ft_strdup(line[0]);
+
         if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0 )
             && get_next_line(0, &str) > 0)
         {
-                // free(pos);
+                // while (line[i])
+                //   free(line[i++]);
+                // free(line);
                 line = ft_strsplit(str, ' ');
                 if (ft_strtab(line) != 3 || line[0][0] == 'L')
                         return (1);
@@ -57,31 +59,36 @@ size_t  ft_tagline(char **line, t_inf **inf, t_box **box)
                 }
                 else if (ft_push_box(inf, box, line[0], "end"))
                         return(1);
+                while (line[i])
+                  free(line[i++]);
+                free(line);
+                free(str);
         }
+        free (pos);
         return (0);
 }
 
 size_t ft_push_box(t_inf  **inf, t_box **box, char *name, char *pos)
 {
-        t_box *first;
+        t_box *elem;
         t_box *new_box;
 
-        first = *box;
+        elem = *box;
         new_box = ft_new_box(name, 0, NULL);
-        if (!ft_strcmp(pos, "start"))
-                (*inf)->start = name;
-        else if(!ft_strcmp(pos, "end"))
-                (*inf)->end = name;
-        if (*box == NULL)
-                (*box) = new_box;
+        // if (!ft_strcmp(pos, "start"))
+        //         (*inf)->start = ft_strdup(name);
+        // else if(!ft_strcmp(pos, "end"))
+        //         (*inf)->end = ft_strdup(name);
+        // free(name);
+        if (elem == NULL)
+            *box = new_box;
         else
         {
-                while ((*box)->next)
-                        (*box) = (*box)->next;
-                (*box)->next = new_box;
-                (*box) = first;
+                printf("yolo1\n");
+                while (elem->next)
+                        elem = elem->next;
+                elem->next = new_box;
         }
-        // printf("push box->name: %s\n", new_box->name);
         return (0);
 }
 

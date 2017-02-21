@@ -17,7 +17,6 @@ int main(void)
 								char *str;
 								char **line;
 								char first_line;
-								int lems;
 								int i;
 								t_inf *inf;
 								t_box *box;
@@ -33,29 +32,29 @@ int main(void)
 																i = 0;
 																line = ft_strsplit(str, ' ');
 																if (ft_strtab(line) < 1)
-																								break;
+																		break;
 																if (first_line && line[0][0] == '#')
 																{
 																								if (ft_tagline(line, &inf, &box))
 																																break;
 																}
-																else if (first_line && ft_strtab(line) == 3)
-																								if (ft_push_box(&inf, &box, line[0], "box"))
-																																return(1);
-																if (first_line && ft_strtab(line) == 1 && line[0][0] != '#')
-																{
-																					// while (line[i])
-																					// {
-																					// 	free(line[i]);
-																					// 	line[i] = NULL;
-																					// 	++i;
-																					// }
-																					// free(line);
-																					// i = 0;
-																					line = ft_strsplit(str, '-');
-																					if (ft_pipe(line, &inf, &box))
-																								break;
-																}
+																// else if (first_line && ft_strtab(line) == 3)
+																// 								if (ft_push_box(&inf, &box, line[0], "box"))
+																// 																return(1);
+																// if (first_line && ft_strtab(line) == 1 && line[0][0] != '#')
+																// {
+																// 					while (line[i])
+																// 					{
+																// 						free(line[i]);
+																// 						line[i] = NULL;
+																// 						++i;
+																// 					}
+																// 					free(line);
+																// 					i = 0;
+																// 					line = ft_strsplit(str, '-');
+																// 					if (ft_pipe(line, &inf, &box))
+																// 								break;
+																// }
 																if (!first_line && ft_isnumber(line[0]) && ft_strtab(line) == 1)
 																{
 																								inf->lemmings = ft_atoi(line[0]);
@@ -78,6 +77,20 @@ int main(void)
 								// 		free(paths);
 								// 		paths = paths->next;
 								// }
+								while (box)
+								{
+									// printf("to\n");
+										while (box->links)
+										{
+											free(box->links);
+											box->links = box->links->next;
+										}
+									free(box->links);
+									free(box->name);
+										// free(paths);
+										box = box->next;
+								}
+								free(box);
 								sleep(30);
 								// free(inf);
 								return (0);
