@@ -8,6 +8,7 @@ void ft_lem_in(t_path **paths, t_inf **inf)
   t_ant *ant;
   t_ant *ant_list;
   t_ant *ant_elem;
+  t_ant *tmp;
 
   i = 1;
   count = (*inf)->lemmings + (*paths)->length - 1;
@@ -39,7 +40,8 @@ void ft_lem_in(t_path **paths, t_inf **inf)
   }
     while (ant_list)
     {
-      free(ant_list);
+      tmp = ant_list;
       ant_list = ant_list->next;
+      free(tmp);
     }
 }

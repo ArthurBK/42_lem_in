@@ -19,6 +19,7 @@ int main(void)
 								char **line2;
 								char first_line;
 								int i;
+								int ret;
 								t_inf *inf;
 								t_box *box;
 								t_path *paths;
@@ -28,7 +29,7 @@ int main(void)
 								inf = (t_inf *)malloc(sizeof(t_inf));
 								ft_bzero(inf, sizeof(*inf));
 								first_line = 0;
-								while (get_next_line(0, &str) > 0)
+								while ((ret = get_next_line(0, &str)) > 0)
 								{
 																i = 0;
 																line = ft_strsplit(str, ' ');
@@ -100,9 +101,9 @@ int main(void)
 								// 	free(box->name);
 								// 	box = box->next;
 								// }
-								// free(inf->start);
-								// free(inf->end);
-								// free(inf);
+								free(inf->start);
+								free(inf->end);
+								free(inf);
 								// free(box);
 								// sleep(30);
 								return (0);
