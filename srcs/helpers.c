@@ -133,8 +133,8 @@ void ft_add_path(t_path **head, t_link *to_add)
 	length = ft_path_size(to_add) - 1;
 	while (to_add)
 	{
-			ft_add_link(&fresh_link, ft_new_way(to_add->box));
-			to_add = to_add->next;
+		ft_add_link(&fresh_link, ft_new_way(to_add->box));
+		to_add = to_add->next;
 	}
 	// free(to_add);
 	new_path = ft_new_path(fresh_link, length);
