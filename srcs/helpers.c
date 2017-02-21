@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/21 17:08:05 by abonneca          #+#    #+#             */
+/*   Updated: 2017/02/21 17:52:47 by abonneca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 size_t	ft_strtab(char **tab)
@@ -26,7 +38,6 @@ t_box	*ft_find_box(t_box **box, char *name)
 	first_box = *box;
 	while ((*box))
 	{
-		// printf("name: %s\n", (*box)->name);
 		if (ft_strcmp(name, (*box)->name) == 0)
 		{
 			match = *box;
@@ -38,10 +49,9 @@ t_box	*ft_find_box(t_box **box, char *name)
 	return (NULL);
 }
 
-t_path	*ft_new_path(t_link *path, size_t length)
+t_path		*ft_new_path(t_link *path, size_t length)
 {
-
-	t_path *new_path;
+	t_path	*new_path;
 
 	if (!(new_path = (t_path *)malloc(sizeof(t_path))))
 		return (NULL);
@@ -53,7 +63,6 @@ t_path	*ft_new_path(t_link *path, size_t length)
 
 t_ant	*ft_new_ant(t_link *current_box, int ant_id)
 {
-
 	t_ant *new_ant;
 
 	if (!(new_ant = (t_ant *)malloc(sizeof(t_ant))))
@@ -64,9 +73,8 @@ t_ant	*ft_new_ant(t_link *current_box, int ant_id)
 	return (new_ant);
 }
 
-t_box *ft_new_box(char *name, int visited, t_link *links)
+t_box	*ft_new_box(char *name, int visited, t_link *links)
 {
-
 	t_box *new_box;
 
 	if (!(new_box = (t_box *)malloc(sizeof(t_box))))
@@ -78,7 +86,7 @@ t_box *ft_new_box(char *name, int visited, t_link *links)
 	return (new_box);
 }
 
-t_link *ft_new_way(t_box *box)
+t_link	*ft_new_way(t_box *box)
 {
 	t_link *new_way;
 
@@ -89,7 +97,7 @@ t_link *ft_new_way(t_box *box)
 	return (new_way);
 }
 
-size_t ft_path_size(t_link *list)
+size_t		ft_path_size(t_link *list)
 {
 	size_t i;
 
@@ -102,8 +110,7 @@ size_t ft_path_size(t_link *list)
 	return (i);
 }
 
-
-void ft_add_ant(t_ant **head, t_ant *to_add)
+void	ft_add_ant(t_ant **head, t_ant *to_add)
 {
 	t_ant *elem;
 
@@ -112,22 +119,21 @@ void ft_add_ant(t_ant **head, t_ant *to_add)
 		(*head) = to_add;
 	else
 	{
-
 		while (elem->next)
 			elem = elem->next;
 		elem->next = to_add;
 	}
 }
 
-void ft_add_path(t_path **head, t_link *to_add)
+void		ft_add_path(t_path **head, t_link *to_add)
 {
-	t_path *elem;
-	t_path *new_path;
-	t_path *prev;
-	t_link *fresh_link = NULL;
-	t_link *to_free;
-	int added;
-	size_t length;
+	t_path	*elem;
+	t_path	*new_path;
+	t_path	*prev;
+	t_link	*fresh_link = NULL;
+	t_link	*to_free;
+	int		added;
+	size_t	length;
 
 	added = 0;
 	length = ft_path_size(to_add) - 1;
@@ -136,7 +142,6 @@ void ft_add_path(t_path **head, t_link *to_add)
 		ft_add_link(&fresh_link, ft_new_way(to_add->box));
 		to_add = to_add->next;
 	}
-	// free(to_add);
 	new_path = ft_new_path(fresh_link, length);
 	elem = *head;
 	if (*head == NULL)
@@ -151,7 +156,6 @@ void ft_add_path(t_path **head, t_link *to_add)
 		}
 		while (elem->next && !added)
 		{
-
 			prev = elem;
 			elem = elem->next;
 			if (elem->length > length)
@@ -159,17 +163,15 @@ void ft_add_path(t_path **head, t_link *to_add)
 				added = 1;
 				prev->next = new_path;
 				new_path->next = elem;
-				break;
+				break ;
 			}
 		}
 		if (!added)
 			elem->next = new_path;
 	}
-	// sleep(3);
 }
 
-
-void ft_add_link(t_link **head, t_link *to_add)
+void	ft_add_link(t_link **head, t_link *to_add)
 {
 	t_link *elem;
 
@@ -181,31 +183,26 @@ void ft_add_link(t_link **head, t_link *to_add)
 		while (elem->next)
 		{
 			if (elem->next == to_add)
-				break;
+				break ;
 			elem = elem->next;
 		}
 		elem->next = to_add;
 	}
 }
 
-t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add)
+t_link		*ft_add_and_cpy_link(t_link *head, t_box *to_add)
 {
-	t_link *new_link;
-	t_link *new_head;
-	// t_link *tmp;
+	t_link	*new_link;
+	t_link	*new_head;
 
 	new_head = NULL;
-	// tmp = NULL;
 	while (head)
 	{
 		if (!(new_link = ft_new_way(head->box)))
 			return (NULL);
 		ft_add_link(&new_head, new_link);
-		// tmp = head;
 		head = head->next;
-		// free(head);
 	}
-	// free(tmp);
 	if (!(new_link = ft_new_way(to_add)))
 		return (NULL);
 	ft_add_link(&new_head, new_link);
