@@ -71,9 +71,9 @@ t_box *ft_new_box(char *name, int visited, t_link *links);
 void ft_add_path(t_path **head, t_link *to_add);
 void ft_add_link(t_link **head, t_link *to_add);
 t_box *ft_add_box(t_box *current_box, t_box *box_to_link);
-t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add);
 void ft_add_ant(t_ant **head, t_ant *to_add);
 t_ant *ft_new_ant(t_link *current_box, int ant_id);
+size_t		ft_path_size(t_link *list);
 
 // parsers
 size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos);
