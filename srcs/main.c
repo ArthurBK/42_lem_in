@@ -23,8 +23,6 @@ int main(void)
 								t_box *box;
 								t_path *paths;
 
-
-								// box = (t_box *)malloc(sizeof(t_box));
 								box = NULL;
 								// paths = NULL;
 								inf = (t_inf *)malloc(sizeof(t_inf));
@@ -46,13 +44,17 @@ int main(void)
 																																return(1);
 																if (first_line && ft_strtab(line) == 1 && line[0][0] != '#')
 																{
-																					while(line[i])
-																							free(line[i++]);
-																					free(line);
-																					i = 0;
-																								line = ft_strsplit(str, '-');
-																								if (ft_pipe(line, &inf, &box))
-																																break;
+																					// while (line[i])
+																					// {
+																					// 	free(line[i]);
+																					// 	line[i] = NULL;
+																					// 	++i;
+																					// }
+																					// free(line);
+																					// i = 0;
+																					line = ft_strsplit(str, '-');
+																					if (ft_pipe(line, &inf, &box))
+																								break;
 																}
 																if (!first_line && ft_isnumber(line[0]) && ft_strtab(line) == 1)
 																{
@@ -60,29 +62,23 @@ int main(void)
 																								first_line = 1;
 																}
 																while (line[i])
-																		free(line[i++]);
+																{
+																	free(line[i]);
+																	line[i] = NULL;
+																	++i;
+																}
 																free(line);
 																free(str);
 								}
-																								// while (line[i])
-																								// 		free(line[i++]);
-								// lems = inf->lemmings;
-								paths = ft_find_paths(&box, &inf);
-								// inf->lemmings = lems;
-								// printf("ilemmings: %zu\n", (inf)->lemmings);
-								ft_lem_in(&paths, &inf);
-								// while (box)
-								// {
-								// 		free(box);
-								// 		box = box->next;
-								// }
+								// paths = ft_find_paths(&box, &inf);
+								// ft_lem_in(&paths, &inf);
 								// while (paths)
 								// {
 								// 		free(paths->path);
 								// 		free(paths);
 								// 		paths = paths->next;
 								// }
-sleep(30);
+								sleep(30);
 								// free(inf);
-		return (0);
+								return (0);
 }
