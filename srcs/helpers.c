@@ -162,39 +162,40 @@ void ft_add_path(t_path **head, t_link *to_add)
 
 void ft_add_link(t_link **head, t_link *to_add)
 {
-	t_link *first;
+	t_link *elem;
 
-	first = *head;
-	if ((*head)->box == NULL)
-		(*head)->box = to_add->box;
+	elem = *head;
+	if (elem == NULL)
+		*head = to_add;
 	else
 	{
-
-		while ((*head)->next)
+		while (elem->next)
 		{
-			if ((*head)->next == to_add)
+			if (elem->next == to_add)
 				break;
-			*head = (*head)->next;
+			elem = elem->next;
 		}
-		(*head)->next = to_add;
+		elem->next = to_add;
 	}
-	*head = first;
 }
 
 t_link *ft_add_and_cpy_link(t_link *head, t_box *to_add)
 {
 	t_link *new_link;
 	t_link *new_head;
+	t_link *tmp;
 
-	if (!(new_head = ft_new_way(NULL)))
-		return (NULL);
+	new_head = NULL;
 	while (head)
 	{
 		if (!(new_link = ft_new_way(head->box)))
 			return (NULL);
 		ft_add_link(&new_head, new_link);
+		tmp = head;
 		head = head->next;
+		free(tmp);
 	}
+	// free(tmp);
 	if (!(new_link = ft_new_way(to_add)))
 		return (NULL);
 	ft_add_link(&new_head, new_link);

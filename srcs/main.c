@@ -80,16 +80,16 @@ int main(void)
 								// }
 								// while (box)
 								// {
-								// 	printf("box->name  %s\n", box->name);
+								// 	// printf("box->name  %s\n", box->name);
 								// 		while (box->links)
 								// 		{
-								// 			printf("links  %s\n", box->links->box->name);
-								// 			// free(box->links);
+								// 			// printf("links  %s\n", box->links->box->name);
+								// 			free(box->links);
 								// 			box->links = box->links->next;
 								// 		}
-								// 	// free(box->links);
-								// 	// free(box->name);
-									// box = box->next;
+								// 	free(box->links);
+								// 	free(box->name);
+								// 	box = box->next;
 								// }
 								// free(box);
 								// free(inf->start);
