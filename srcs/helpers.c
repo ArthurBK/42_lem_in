@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
-size_t		ft_path_size(t_link *list)
+
+size_t	ft_path_size(t_link *list)
 {
 	size_t i;
 
