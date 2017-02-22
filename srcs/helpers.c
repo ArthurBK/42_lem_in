@@ -6,7 +6,7 @@
 /*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:08:05 by abonneca          #+#    #+#             */
-/*   Updated: 2017/02/21 17:52:47 by abonneca         ###   ########.fr       */
+/*   Updated: 2017/02/22 10:20:18 by abonneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,18 @@ t_box	*ft_find_box(t_box **box, char *name)
 		(*box) = (*box)->next;
 	}
 	return (NULL);
+}
+
+void	free_lines(char **lines)
+{
+	int		i;
+
+	i = 0;
+	while (lines[i])
+	{
+		free(lines[i]);
+		lines[i] = NULL;
+		++i;
+	}
+	free(lines);
 }

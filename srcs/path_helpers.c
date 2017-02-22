@@ -6,7 +6,7 @@
 /*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 09:26:09 by abonneca          #+#    #+#             */
-/*   Updated: 2017/02/22 09:26:12 by abonneca         ###   ########.fr       */
+/*   Updated: 2017/02/22 10:40:32 by abonneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,43 @@ t_path		*ft_new_path(t_link *path, size_t length)
 	return (new_path);
 }
 
-void		ft_add_path(t_path **head, t_link *to_add)
+void		ft_sorted_insert(t_path **head, size_t length, t_path *new_path)
 {
-	t_path	*elem;
-	t_path	*new_path;
 	t_path	*prev;
-	t_link	*fresh_link = NULL;
-	t_link	*to_free;
+	t_path	*elem;
 	int		added;
-	size_t	length;
 
 	added = 0;
+	elem = *head;
+	if (elem->length > length)
+	{
+		added = 1;
+		new_path->next = *head;
+		*head = new_path;
+	}
+	while (elem->next && !added)
+	{
+		prev = elem;
+		elem = elem->next;
+		if (elem->length > length)
+		{
+			added = 1;
+			prev->next = new_path;
+			new_path->next = elem;
+			break ;
+		}
+	}
+	!added ? elem->next = new_path : 0;
+}
+
+void		ft_add_path(t_path **head, t_link *to_add)
+{
+	t_path	*new_path;
+	t_link	*fresh_link;
+	t_link	*to_free;
+	size_t	length;
+
+	fresh_link = NULL;
 	length = ft_path_size(to_add) - 1;
 	while (to_add)
 	{
@@ -42,30 +68,10 @@ void		ft_add_path(t_path **head, t_link *to_add)
 		to_add = to_add->next;
 	}
 	new_path = ft_new_path(fresh_link, length);
-	elem = *head;
 	if (*head == NULL)
 		*head = new_path;
 	else
 	{
-		if (elem->length > length)
-		{
-			added = 1;
-			new_path->next = *head;
-			*head = new_path;
-		}
-		while (elem->next && !added)
-		{
-			prev = elem;
-			elem = elem->next;
-			if (elem->length > length)
-			{
-				added = 1;
-				prev->next = new_path;
-				new_path->next = elem;
-				break ;
-			}
-		}
-		if (!added)
-			elem->next = new_path;
+		ft_sorted_insert(head, ft_path_size(to_add) - 1, new_path);
 	}
 }

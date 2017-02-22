@@ -6,7 +6,7 @@
 /*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:57:14 by abonneca          #+#    #+#             */
-/*   Updated: 2017/02/21 17:02:46 by abonneca         ###   ########.fr       */
+/*   Updated: 2017/02/22 10:21:05 by abonneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 	char	*str;
 	char	**line2;
 	char	*pos;
-	int		i;
 
-	i = 0;
 	pos = line[0];
 	if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0)
 			&& get_next_line(0, &str) > 0)
@@ -68,9 +66,7 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 		}
 		else if (ft_push_box(inf, box, line2[0], "end"))
 			return (1);
-		while (line2[i])
-			free(line2[i++]);
-		free(line2);
+		free_lines(line2);
 		free(str);
 	}
 	return (0);

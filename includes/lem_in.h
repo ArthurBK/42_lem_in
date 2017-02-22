@@ -74,6 +74,7 @@ t_box *ft_add_box(t_box *current_box, t_box *box_to_link);
 void ft_add_ant(t_ant **head, t_ant *to_add);
 t_ant *ft_new_ant(t_link *current_box, int ant_id);
 size_t		ft_path_size(t_link *list);
+void free_lines(char **lines);
 
 // parsers
 size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos);
