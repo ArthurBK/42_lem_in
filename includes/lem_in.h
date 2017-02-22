@@ -85,7 +85,7 @@ t_box *ft_select_box(char *name, t_box **boxes);
 
 // paths
 t_path *ft_find_paths(t_box **box, t_inf **inf);
-t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *end);
+// t_path *ft_eval_path(t_path *paths, t_link *new_way, t_box *current_box, t_box *end);
 
 // resolution
 void ft_lem_in(t_path **paths, t_inf **inf);

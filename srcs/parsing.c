@@ -58,7 +58,6 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 		while(get_next_line(0, &str) > 0)
 		{
 			line2 = ft_strsplit(str, ' ');
-			// printf("line2[0]: %s\n", line2[0]);
 			if (line2[0][0] == '#' && ft_is_comment(line2))
 			{
 				free_lines(line2);
@@ -67,7 +66,6 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 			}
 			else
 				break ;
-
 		}
 		if (ft_strtab(line2) != 3 || line2[0][0] == 'L')
 			return (1);

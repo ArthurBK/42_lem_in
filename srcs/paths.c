@@ -13,7 +13,7 @@
 #include "lem_in.h"
 
 t_path		*ft_eval_path(t_path *paths,
-		t_link *new_way, t_box *current_box, t_box *end)
+		t_link *new_way, t_box *current_box, t_box *end, int k)
 {
 	t_link	*links;
 	t_link	*cpy_way;
@@ -29,10 +29,11 @@ t_path		*ft_eval_path(t_path *paths,
 	{
 		if (!links->box->visited)
 		{
+			printf("box %s k: %i\n", links->box->name, k);
 			tmp = ft_new_way(links->box);
 			ft_add_link(&new_way, tmp);
 			current_box->visited = 1;
-			paths = ft_eval_path(paths, new_way, links->box, end);
+			paths = ft_eval_path(paths, new_way, links->box, end, k + 1);
 			free(tmp);
 			current_box->visited = 0;
 		}
@@ -52,7 +53,7 @@ t_path		*ft_find_paths(t_box **box, t_inf **inf)
 	end = ft_find_box(box, (*inf)->end);
 	paths = NULL;
 	new_way = ft_new_way(start);
-	paths = ft_eval_path(paths, new_way, start, end);
+	paths = ft_eval_path(paths, new_way, start, end, 0);
 	if (paths != NULL)
 		(*inf)->valid_map = 1;
 	free(new_way);

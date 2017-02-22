@@ -68,6 +68,7 @@ void	ft_add_link(t_link **head, t_link *to_add)
 	t_link *elem;
 
 	elem = *head;
+	// printf("room %s\n", to_add->box->name);
 	if (elem == NULL)
 		*head = to_add;
 	else

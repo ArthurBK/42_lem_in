@@ -75,6 +75,7 @@ int		main(void)
 
 	if (ft_parse(inf, &box, &paths))
 		return (1);
+		// sleep(5);
 	if (ft_strlen(inf->start) && ft_strlen(inf->end) && inf->lemmings > 0)
 	{
 			paths = ft_find_paths(&box, &inf);
@@ -90,6 +91,5 @@ int		main(void)
 	else
 		ft_putstr("ERROR\n");
 	free(inf);
-	sleep(5);
 	return (0);
 }
