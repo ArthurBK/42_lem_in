@@ -53,10 +53,22 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 	char	*pos;
 
 	pos = line[0];
-	if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0)
-			&& get_next_line(0, &str) > 0)
+	if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0))
 	{
-		line2 = ft_strsplit(str, ' ');
+		while(get_next_line(0, &str) > 0)
+		{
+			line2 = ft_strsplit(str, ' ');
+			// printf("line2[0]: %s\n", line2[0]);
+			if (line2[0][0] == '#' && ft_is_comment(line2))
+			{
+				free_lines(line2);
+				free(str);
+				continue ;
+			}
+			else
+				break ;
+
+		}
 		if (ft_strtab(line2) != 3 || line2[0][0] == 'L')
 			return (1);
 		if (ft_strcmp(pos, "##start") == 0)
@@ -66,8 +78,8 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 		}
 		else if (ft_push_box(inf, box, line2[0], "end"))
 			return (1);
-		free_lines(line2);
 		free(str);
+		free_lines(line2);
 	}
 	return (0);
 }

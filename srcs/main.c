@@ -12,6 +12,14 @@
 
 #include "lem_in.h"
 
+int	ft_is_comment(char **line)
+{
+	if ((ft_strcmp(line[0], "##start") == 0 || ft_strcmp(line[0], "##end") == 0)
+	&& ft_strtab(line) == 1)
+			return (0);
+	return (1);
+}
+
 int			ft_parse(t_inf *inf, t_box **box, t_path **paths)
 {
 	char	f_l;
@@ -21,6 +29,18 @@ int			ft_parse(t_inf *inf, t_box **box, t_path **paths)
 	while (get_next_line(0, &str) > 0)
 	{
 		l = ft_strsplit(str, ' ');
+		if (l[0][0] == '#' && ft_is_comment(l))
+		{
+			free_lines(l);
+			free(str);
+			continue ;
+		}
+		if (l[0][0] != '#' && ft_strtab(l) > 3)
+		{
+				free_lines(l);
+				// free(str);
+				break ;
+		}
 		if (f_l && ft_strtab(l) > 0 && l[0][0] == '#' && ft_tagline(l, &inf, box))
 			return (0);
 		else if (f_l && ft_strtab(l) == 3 && ft_push_box(&inf, box, l[0], "box"))
@@ -53,11 +73,21 @@ int		main(void)
 	ft_bzero(inf, sizeof(inf));
 	if (ft_parse(inf, &box, &paths))
 		return (1);
-	paths = ft_find_paths(&box, &inf);
-	ft_lem_in(&paths, &inf);
-	free(inf->start);
-	free(inf->end);
+		if (!inf->start || !inf->end)
+		{
+			paths = ft_find_paths(&box, &inf);
+			if (inf->valid_map)
+			{
+				ft_lem_in(&paths, &inf);
+				free(inf->start);
+				free(inf->end);
+			}
+			else
+				ft_putstr("ERROR\n");
+	}
+	else
+		ft_putstr("ERROR\n");
 	free(inf);
-	sleep(7);
+	sleep(5);
 	return (0);
 }
