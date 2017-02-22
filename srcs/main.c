@@ -69,12 +69,14 @@ int		main(void)
 
 	box = NULL;
 	paths = NULL;
+	// inf = NULL
 	inf = (t_inf *)malloc(sizeof(t_inf));
-	ft_bzero(inf, sizeof(inf));
+	ft_bzero(inf, sizeof(t_inf));
+
 	if (ft_parse(inf, &box, &paths))
 		return (1);
-		if (!inf->start || !inf->end)
-		{
+	if (ft_strlen(inf->start) && ft_strlen(inf->end) && inf->lemmings > 0)
+	{
 			paths = ft_find_paths(&box, &inf);
 			if (inf->valid_map)
 			{
