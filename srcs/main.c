@@ -27,9 +27,9 @@ int			ft_error_coor(char *str, char **lines)
 	return (1);
 }
 
-int			ft_pipe_error(char **l, char *str, t_inf **inf, t_box **box)
+int			ft_pipe_error(char **l, char *str, t_box **box)
 {
-	if (ft_pipe(l = ft_strsplit(str, '-'), inf, box))
+	if (ft_pipe(l = ft_strsplit(str, '-'), box))
 	{
 		free_lines(l);
 		return (1);
@@ -38,7 +38,7 @@ int			ft_pipe_error(char **l, char *str, t_inf **inf, t_box **box)
 	return (0);
 }
 
-int			ft_parse(t_inf *inf, t_box **box, t_path **paths)
+int			ft_parse(t_inf *inf, t_box **box)
 {
 	char	f_l;
 	char	*str;
@@ -55,7 +55,7 @@ int			ft_parse(t_inf *inf, t_box **box, t_path **paths)
 		if (f_l && ft_tabl(l) > 0 && l[0][0] != '#' && ft_tabl(l) > 3)
 			return (ft_error_coor(str, l));
 		if (f_l && ft_tabl(l) == 1 && l[0][0] != '#')
-			if (ft_pipe_error(l, str, &inf, box) == 1)
+			if (ft_pipe_error(l, str, box) == 1)
 				break ;
 		if (!f_l && ft_tabl(l) > 0 && ft_isnumber(l[0]) && ft_tabl(l) == 1
 				&& (inf->lemmings = ft_atoi(l[0])))
@@ -77,7 +77,7 @@ int			main(void)
 	paths = NULL;
 	inf = (t_inf *)malloc(sizeof(t_inf));
 	ft_bzero(inf, sizeof(t_inf));
-	if (ft_parse(inf, &box, &paths) == 1)
+	if (ft_parse(inf, &box) == 1)
 	{
 		ft_putstr("ERROR\n");
 		return (0);

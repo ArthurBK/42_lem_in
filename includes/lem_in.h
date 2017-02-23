@@ -83,7 +83,7 @@ void ft_print_sol(t_path **paths, t_inf **inf);
 // parsers
 size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos);
 size_t	ft_tagline(char **line,	t_inf	**inf, t_box **box);
-size_t ft_pipe(char **line,	t_inf	**inf, t_box **box);
+size_t ft_pipe(char **line, t_box **box);
 t_box *ft_select_box(char *name, t_box **boxes);
 
 // paths

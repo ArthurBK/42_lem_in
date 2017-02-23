@@ -16,8 +16,6 @@ t_path		*ft_eval_path(t_path *paths,
 		t_link *new_way, t_box *current_box, t_box *end)
 {
 	t_link	*links;
-	t_link	*cpy_way;
-	t_link	*tmp;
 
 	links = current_box->links;
 	if (current_box == end)

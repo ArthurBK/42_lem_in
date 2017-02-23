@@ -56,7 +56,6 @@ void		ft_add_path(t_path **head, t_link *to_add)
 {
 	t_path	*new_path;
 	t_link	*fresh_link;
-	t_link	*to_free;
 	size_t	length;
 
 	fresh_link = NULL;

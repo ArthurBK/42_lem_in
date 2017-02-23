@@ -102,7 +102,7 @@ size_t		ft_push_box(t_inf **inf, t_box **box, char *name, char *pos)
 	return (0);
 }
 
-size_t		ft_pipe(char **line, t_inf **inf, t_box **box)
+size_t		ft_pipe(char **line, t_box **box)
 {
 	t_box	*current_box;
 	t_box	*box_to_link;
