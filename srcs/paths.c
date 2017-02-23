@@ -6,7 +6,7 @@
 /*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:45:13 by abonneca          #+#    #+#             */
-/*   Updated: 2017/02/21 16:54:17 by abonneca         ###   ########.fr       */
+/*   Updated: 2017/02/23 14:37:11 by abonneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_path		*ft_eval_path(t_path *paths,
 	links = current_box->links;
 	if (current_box == end)
 	{
-		paths = ft_add_path(paths, new_way);
+		ft_add_path(&paths, new_way);
 		return (paths);
 	}
 	while (links)
@@ -49,11 +49,8 @@ t_path		*ft_find_paths(t_box **box, t_inf **inf)
 	start = ft_find_box(box, (*inf)->start);
 	end = ft_find_box(box, (*inf)->end);
 	paths = NULL;
-
 	new_way = ft_new_way(start);
 	paths = ft_eval_path(paths, new_way, start, end);
-	// printf("af\n");
-	// sleep (5);
 	if (paths != NULL)
 		(*inf)->valid_map = 1;
 	while (new_way)

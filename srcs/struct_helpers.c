@@ -6,7 +6,7 @@
 /*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 09:26:33 by abonneca          #+#    #+#             */
-/*   Updated: 2017/02/22 09:26:34 by abonneca         ###   ########.fr       */
+/*   Updated: 2017/02/23 14:37:48 by abonneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,11 @@ void	ft_add_ant(t_ant **head, t_ant *to_add)
 	}
 }
 
-t_link *ft_add_link(t_link *head, t_link *to_add)
+t_link	*ft_add_link(t_link *head, t_link *to_add)
 {
 	t_link *elem;
 
 	elem = head;
-	// printf("room %s\n", to_add->box->name);
 	if (elem == NULL)
 		return (to_add);
 	else

@@ -68,8 +68,9 @@ t_box *ft_find_box(t_box **box, char *name);
 t_link *ft_new_way(t_box *box);
 t_path *ft_new_path(t_link *path, size_t length);
 t_box *ft_new_box(char *name, int visited, t_link *links);
-t_path *ft_add_path(t_path *head, t_link *to_add);
+void ft_add_path(t_path **head, t_link *to_add);
 t_link *ft_add_link(t_link *head, t_link *to_add);
+char **ft_skip_comments(void);
 
 t_box *ft_add_box(t_box *current_box, t_box *box_to_link);
 void ft_add_ant(t_ant **head, t_ant *to_add);

@@ -52,25 +52,14 @@ t_box		*ft_add_box(t_box *current_box, t_box *box_to_link)
 
 size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 {
-	char	*str;
 	char	**line2;
 	char	*pos;
 
 	pos = line[0];
 	if ((ft_strcmp(pos, "##start") == 0 || ft_strcmp(pos, "##end") == 0))
 	{
-		while(get_next_line(0, &str) > 0)
-		{
-			line2 = ft_strsplit(str, ' ');
-			if (line2[0][0] == '#' && ft_is_comment(line2))
-			{
-				free_lines(line2);
-				free(str);
-				continue ;
-			}
-			else
-				break ;
-		}
+		if (!(line2 = ft_skip_comments()))
+			return (1);
 		if (ft_strtab(line2) != 3 || line2[0][0] == 'L')
 			return (1);
 		if (ft_strcmp(pos, "##start") == 0)
@@ -80,7 +69,6 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 		}
 		else if (ft_push_box(inf, box, line2[0], "end"))
 			return (1);
-		free(str);
 		free_lines(line2);
 	}
 	return (0);

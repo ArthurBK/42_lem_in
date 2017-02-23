@@ -77,8 +77,8 @@ int		main(void)
 		ft_putstr("ERROR\n");
 		return (0);
 	}
-printf("c'est la mer noir\n");
-sleep(5);
+// printf("c'est la mer noir\n");
+// sleep(5);
 	if (ft_strlen(inf->start) && ft_strlen(inf->end) && inf->lemmings > 0)
 	{
 			paths = ft_find_paths(&box, &inf);
