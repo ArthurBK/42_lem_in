@@ -38,7 +38,6 @@ int			ft_parse(t_inf *inf, t_box **box, t_path **paths)
 		if (l[0][0] != '#' && ft_strtab(l) > 3)
 		{
 				free_lines(l);
-				// free(str);
 				break ;
 		}
 		if (f_l && ft_strtab(l) > 0 && l[0][0] == '#' && ft_tagline(l, &inf, box))
@@ -73,9 +72,13 @@ int		main(void)
 	inf = (t_inf *)malloc(sizeof(t_inf));
 	ft_bzero(inf, sizeof(t_inf));
 
-	if (ft_parse(inf, &box, &paths))
-		return (1);
-		// sleep(5);
+	if (ft_parse(inf, &box, &paths) == 1)
+	{
+		ft_putstr("ERROR\n");
+		return (0);
+	}
+printf("c'est la mer noir\n");
+sleep(5);
 	if (ft_strlen(inf->start) && ft_strlen(inf->end) && inf->lemmings > 0)
 	{
 			paths = ft_find_paths(&box, &inf);
@@ -91,5 +94,6 @@ int		main(void)
 	else
 		ft_putstr("ERROR\n");
 	free(inf);
+	sleep(5);
 	return (0);
 }

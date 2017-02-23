@@ -24,19 +24,19 @@ t_path		*ft_new_path(t_link *path, size_t length)
 	return (new_path);
 }
 
-void		ft_sorted_insert(t_path **head, size_t length, t_path *new_path)
+t_path	*ft_sorted_insert(t_path *head, size_t length, t_path *new_path)
 {
 	t_path	*prev;
 	t_path	*elem;
 	int		added;
 
 	added = 0;
-	elem = *head;
+	elem = head;
 	if (elem->length > length)
 	{
 		added = 1;
-		new_path->next = *head;
-		*head = new_path;
+		new_path->next = head;
+		return (new_path);
 	}
 	while (elem->next && !added)
 	{
@@ -51,9 +51,10 @@ void		ft_sorted_insert(t_path **head, size_t length, t_path *new_path)
 		}
 	}
 	!added ? elem->next = new_path : 0;
+	return (head);
 }
 
-void		ft_add_path(t_path **head, t_link *to_add)
+t_path	*ft_add_path(t_path *head, t_link *to_add)
 {
 	t_path	*new_path;
 	t_link	*fresh_link;
@@ -64,14 +65,14 @@ void		ft_add_path(t_path **head, t_link *to_add)
 	length = ft_path_size(to_add) - 1;
 	while (to_add)
 	{
-		ft_add_link(&fresh_link, ft_new_way(to_add->box));
+		fresh_link = ft_add_link(fresh_link, ft_new_way(to_add->box));
 		to_add = to_add->next;
 	}
 	new_path = ft_new_path(fresh_link, length);
-	if (*head == NULL)
-		*head = new_path;
+	if (head == NULL)
+		return(new_path);
 	else
 	{
-		ft_sorted_insert(head, ft_path_size(to_add) - 1, new_path);
+		return (ft_sorted_insert(head, ft_path_size(to_add) - 1, new_path));
 	}
 }

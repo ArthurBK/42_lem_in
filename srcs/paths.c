@@ -22,19 +22,16 @@ t_path		*ft_eval_path(t_path *paths,
 	links = current_box->links;
 	if (current_box == end)
 	{
-		ft_add_path(&paths, new_way);
+		paths = ft_add_path(paths, new_way);
 		return (paths);
 	}
 	while (links)
 	{
 		if (!links->box->visited)
 		{
-			// printf("box %s k: %i\n", links->box->name, k);
-			tmp = ft_new_way(links->box);
-			ft_add_link(&new_way, tmp);
+			new_way = ft_add_link(new_way, ft_new_way(links->box));
 			current_box->visited = 1;
 			paths = ft_eval_path(paths, new_way, links->box, end);
-			free(tmp);
 		}
 		links = links->next;
 	}
@@ -46,15 +43,24 @@ t_path		*ft_find_paths(t_box **box, t_inf **inf)
 	t_box	*start;
 	t_box	*end;
 	t_link	*new_way;
+	t_link	*tmp;
 	t_path	*paths;
 
 	start = ft_find_box(box, (*inf)->start);
 	end = ft_find_box(box, (*inf)->end);
 	paths = NULL;
+
 	new_way = ft_new_way(start);
 	paths = ft_eval_path(paths, new_way, start, end);
+	// printf("af\n");
+	// sleep (5);
 	if (paths != NULL)
 		(*inf)->valid_map = 1;
-	free(new_way);
+	while (new_way)
+	{
+		tmp = new_way;
+		new_way = new_way->next;
+		free(tmp);
+	}
 	return (paths);
 }

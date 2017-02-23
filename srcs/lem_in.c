@@ -39,7 +39,7 @@ void		print_ants(t_ant *ant_elem)
 		}
 		ant_elem = ant_elem->next;
 	}
-	printf("\n");
+	ft_putstr("\n");
 }
 
 void		ft_lem_in(t_path **paths, t_inf **inf)

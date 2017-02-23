@@ -63,14 +63,14 @@ void	ft_add_ant(t_ant **head, t_ant *to_add)
 	}
 }
 
-void	ft_add_link(t_link **head, t_link *to_add)
+t_link *ft_add_link(t_link *head, t_link *to_add)
 {
 	t_link *elem;
 
-	elem = *head;
+	elem = head;
 	// printf("room %s\n", to_add->box->name);
 	if (elem == NULL)
-		*head = to_add;
+		return (to_add);
 	else
 	{
 		while (elem->next)
@@ -80,5 +80,6 @@ void	ft_add_link(t_link **head, t_link *to_add)
 			elem = elem->next;
 		}
 		elem->next = to_add;
+		return (head);
 	}
 }

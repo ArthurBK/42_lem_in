@@ -40,7 +40,11 @@ t_box		*ft_add_box(t_box *current_box, t_box *box_to_link)
 	else
 	{
 		while (elem->next)
+		{
+			if (elem->box == box_to_link)
+				return (current_box);
 			elem = elem->next;
+		}
 		elem->next = new_link;
 	}
 	return (current_box);
@@ -98,7 +102,13 @@ size_t		ft_push_box(t_inf **inf, t_box **box, char *name, char *pos)
 	else
 	{
 		while (elem->next)
+		{
+			if (ft_strcmp(elem->name, name) == 0)
+				return (1);
 			elem = elem->next;
+		}
+		if (ft_strcmp(elem->name, name) == 0)
+			return (1);
 		elem->next = new_box;
 	}
 	return (0);
