@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include <lem_in.h>
 
 t_box		*ft_select_box(char *name, t_box **boxes)
 {

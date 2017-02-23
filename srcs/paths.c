@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include <lem_in.h>
 
 t_path		*ft_eval_path(t_path *paths,
 		t_link *new_way, t_box *current_box, t_box *end)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include <lem_in.h>
 
 t_path		*ft_new_path(t_link *path, size_t length)
 {
