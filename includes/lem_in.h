@@ -13,10 +13,6 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-// to delete
-#include <stdio.h>
-//
-
 # include <libft.h>
 #define RED  "\e[91m"
 #define GRN  "\e[92m"
@@ -27,8 +23,8 @@
 #define WHT  "\e[37m"
 #define EOC  "\e[0m"
 
-typedef struct  s_link t_link;
-typedef struct  s_box t_box;
+// typedef struct  s_link t_link;
+// typedef struct  s_box t_box;
 
 typedef struct  s_inf {
   size_t lemmings;
@@ -37,17 +33,17 @@ typedef struct  s_inf {
   char valid_map;
 }               t_inf;
 
+typedef struct  s_link {
+  struct s_box *box;
+  struct s_link *next;
+}               t_link;
+
 typedef struct  s_box {
   char         *name;
   int           visited;
   struct s_link *links;
   struct s_box *next;
 }               t_box;
-
-typedef struct  s_link {
-  struct s_box *box;
-  struct s_link *next;
-}               t_link;
 
 typedef struct  s_path {
   size_t length;
