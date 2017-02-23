@@ -25,7 +25,7 @@ size_t	ft_path_size(t_link *list)
 	return (i);
 }
 
-size_t	ft_strtab(char **tab)
+size_t	ft_tabl(char **tab)
 {
 	size_t i;
 

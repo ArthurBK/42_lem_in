@@ -6,7 +6,7 @@
 /*   By: abonneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:06:59 by abonneca          #+#    #+#             */
-/*   Updated: 2017/02/22 10:15:15 by abonneca         ###   ########.fr       */
+/*   Updated: 2017/02/23 15:51:04 by abonneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ void		print_ants(t_ant *ant_elem)
 		ant_elem = ant_elem->next;
 	}
 	ft_putstr("\n");
+}
+
+void		ft_print_sol(t_path **paths, t_inf **inf)
+{
+	ft_lem_in(paths, inf);
+	free((*inf)->start);
+	free((*inf)->end);
 }
 
 void		ft_lem_in(t_path **paths, t_inf **inf)

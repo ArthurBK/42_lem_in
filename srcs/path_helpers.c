@@ -83,7 +83,7 @@ char		**ft_skip_comments(void)
 	while (get_next_line(0, &str) > 0)
 	{
 		line2 = ft_strsplit(str, ' ');
-		if (ft_strtab(line2) > 0 && line2[0][0] == '#' && ft_is_comment(line2))
+		if (ft_tabl(line2) > 0 && line2[0][0] == '#' && ft_is_comment(line2))
 		{
 			free_lines(line2);
 			free(str);

@@ -60,7 +60,7 @@ size_t		ft_tagline(char **line, t_inf **inf, t_box **box)
 	{
 		if (!(line2 = ft_skip_comments()))
 			return (1);
-		if (ft_strtab(line2) != 3 || line2[0][0] == 'L')
+		if (ft_tabl(line2) != 3 || line2[0][0] == 'L')
 			return (1);
 		if (ft_strcmp(pos, "##start") == 0)
 		{
@@ -107,7 +107,7 @@ size_t		ft_pipe(char **line, t_inf **inf, t_box **box)
 	t_box	*current_box;
 	t_box	*box_to_link;
 
-	if (ft_strtab(line) == 2)
+	if (ft_tabl(line) == 2)
 	{
 		if (!(current_box = ft_select_box(line[0], box))
 				|| !(box_to_link = ft_select_box(line[1], box)))

@@ -62,7 +62,7 @@ typedef struct  s_ant {
 }               t_ant;
 
 // helpers
-size_t	ft_strtab(char **tab);
+size_t	ft_tabl(char **tab);
 int ft_isnumber(char *str);
 t_box *ft_find_box(t_box **box, char *name);
 t_link *ft_new_way(t_box *box);
@@ -78,6 +78,7 @@ t_ant *ft_new_ant(t_link *current_box, int ant_id);
 size_t		ft_path_size(t_link *list);
 void free_lines(char **lines);
 int	ft_is_comment(char **line);
+void ft_print_sol(t_path **paths, t_inf **inf);
 
 // parsers
 size_t ft_push_box(t_inf	**inf, t_box **box, char *name, char *pos);
