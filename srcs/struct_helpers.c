@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include <lem_in.h>
 
 t_ant	*ft_new_ant(t_link *current_box, int ant_id)
 {
